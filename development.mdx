@@ -3,6 +3,24 @@ title: 'Tech Stack & Development'
 description: 'Architecture, tech stack, and local development setup'
 ---
 
+## Key Design Decisions
+
+<AccordionGroup>
+  <Accordion title="Why two API styles?" icon="code-branch">
+    **Google-compatible** (`/directions/v2:computeRoutes`) lets teams migrate from Google Routes API by changing only the base URL. **RESTful routes** (`/v1/routes`) adds statefulness, async processing, and webhooks for production use cases. Both hit the same enrichment pipeline.
+  </Accordion>
+  <Accordion title="Why this resource design?" icon="cube">
+    We adopted industry best practices: ULID-prefixed IDs (`route_`), an `object` field on every resource, idempotency keys, consistent error envelopes, and a processing/complete/failed state machine.
+  </Accordion>
+  <Accordion title="Why physics enrichment?" icon="flask">
+    Google Routes API tells you distance and duration - but not road grade, curvature, or fuel consumption. For a 36-ton semi on a 6% grade, fuel burn can be 3× higher than flat road. Motion fills that gap using real elevation models and road-load physics equations.
+  </Accordion>
+  <Accordion title="Why cursor-based pagination?" icon="arrow-right">
+    Telemetry segments can number in the hundreds. We use cursor-based pagination with `hasMore`/`nextCursor` for predictable performance. Offset pagination would be fragile for large segment lists.
+  </Accordion>
+</AccordionGroup>
+
+
 ## Architecture
 
 Motion is a freight routing API built for hackathon speed and production-grade design. It wraps the open-source [Valhalla](https://github.com/valhalla/valhalla) routing engine and layers on physics-based enrichment computed from real USGS elevation data and road geometry.
@@ -54,23 +72,6 @@ flowchart TD
 | **Migrations** | [Alembic](https://alembic.sqlalchemy.org/) | Database schema migrations |
 | **Validation** | [Pydantic v2](https://docs.pydantic.dev/) | Request/response schema validation |
 | **Containerization** | [Docker Compose](https://docs.docker.com/compose/) | One-command setup for all services |
-
-## Key Design Decisions
-
-<AccordionGroup>
-  <Accordion title="Why two API styles?" icon="code-branch">
-    **Google-compatible** (`/directions/v2:computeRoutes`) lets teams migrate from Google Routes API by changing only the base URL. **RESTful routes** (`/v1/routes`) adds statefulness, async processing, and webhooks for production use cases. Both hit the same enrichment pipeline.
-  </Accordion>
-  <Accordion title="Why this resource design?" icon="cube">
-    We adopted industry best practices: ULID-prefixed IDs (`route_`), an `object` field on every resource, idempotency keys, consistent error envelopes, and a processing/complete/failed state machine.
-  </Accordion>
-  <Accordion title="Why physics enrichment?" icon="flask">
-    Google Routes API tells you distance and duration - but not road grade, curvature, or fuel consumption. For a 36-ton semi on a 6% grade, fuel burn can be 3× higher than flat road. Motion fills that gap using real elevation models and road-load physics equations.
-  </Accordion>
-  <Accordion title="Why cursor-based pagination?" icon="arrow-right">
-    Telemetry segments can number in the hundreds. We use cursor-based pagination with `hasMore`/`nextCursor` for predictable performance. Offset pagination would be fragile for large segment lists.
-  </Accordion>
-</AccordionGroup>
 
 ## Local Development
 
