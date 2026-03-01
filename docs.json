@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Motion",
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
@@ -11,10 +11,10 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Docs",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Overview",
             "pages": [
               "index",
               "quickstart",
@@ -22,65 +22,42 @@
             ]
           },
           {
-            "group": "Customization",
+            "group": "Google-Compatible",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "endpoint/google-compute-routes"
             ]
           },
           {
-            "group": "Writing content",
+            "group": "Routes",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
+              "endpoint/create-route",
+              "endpoint/get-route",
+              "endpoint/delete-route"
             ]
           },
           {
-            "group": "AI tools",
+            "group": "Telemetry",
             "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "API reference",
-        "groups": [
-          {
-            "group": "API documentation",
-            "pages": [
-              "api-reference/introduction"
+              "endpoint/get-telemetry"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Webhooks",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "endpoint/webhook"
+            ]
+          },
+          {
+            "group": "Health",
+            "pages": [
+              "endpoint/health"
             ]
           }
         ]
       }
     ],
     "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
+      "anchors": []
     }
   },
   "logo": {
@@ -90,14 +67,14 @@
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "label": "Made with ❤️ for HackIllinois2026",
+        "href": "https://hackillinois.org/"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Github",
+      "href": "https://github.com/r-thak/motion"
     }
   },
   "contextual": {
